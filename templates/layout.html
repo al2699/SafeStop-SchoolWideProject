@@ -1,0 +1,20 @@
+<!doctype html>
+<title>Connex</title>
+<link rel=stylesheet type=text/css href="{{url_for('static', filename='style.css') }}">
+<div class=page>
+	<h1>Connex</h1>
+	<div class="onlyImage">
+		<a href="https://www.youtube.com/channel/UCLNKQXc_XVZANg8GwwRkVIw"><img src="http://i1.kym-cdn.com/entries/icons/facebook/000/013/564/aP2dv.jpg" alt="Dogeo" style="width:100px;height:100px"/></a>
+	</div>
+	<div class=metanav>
+	{%if not session.logged_in %}
+		<a href="{{url_for('login')}}">log in</a>
+	{% else %}
+		<a href="{{url_for('logout') }}">log out</a>
+	{% endif %}
+	</div> 
+	{% for message in get_flashed_messages() %}
+		<div class=flash>{{ message }}</div>
+	{% endfor %}
+	{% block body %}{% endblock %}
+</div>
