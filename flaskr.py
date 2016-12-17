@@ -2,6 +2,7 @@
 import os
 import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
+from wtforms import form
 
 #create our little application :)
 app = Flask(__name__)
@@ -13,6 +14,8 @@ app.config.update(dict(
     SECRET_KEY = 'development key',
     USERNAME = 'admin',
     PASSWORD = 'default'
+
+    
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent = True)
 
@@ -84,14 +87,31 @@ def logout():
     session.pop('logged_in', None)
     flash('You were logged out')
     return redirect(url_for('show_entries'))
-    
+
 #Method to create an account for posting/access to other parts of the site
 @app.route('/createaccount', methods='CREATEACCOUNT')
 def createaccount():
-    if request.form['screenname']:
-        app.config.update(request.form['screenname'])
-    else:
-        print('Did not recieve a screenname.')
+    error = None
+    if request.form == 'CREATEACCOUNT':
+        if request.form['screenname']:
+            app.config.update(request.form['screenname'])
+        else:
+            print('Did not recieve a screenname.')
+        if request.form['passcode']:
+            app.config.update(request.form['passcode'])
+        else:
+            print('Did not recieve a request for passcode')
+    return render_template('login.html', error=error)
+
+class RegistrationForm(form):
+    username = TextField(Username, [validators.Length(min=4, max=20)])
+    email = TextField(Email, [validators.Length(min=6, max=30)])
+    password = PasswordField('Password', [validators.Required(), validators.EqualTo('confirm', message="Passwords must match")])
+    confirm = PasswordField('repeat password')
+    accept_tos = BooleanField('I accept the terms of service and the privacy notice.')
+
+
+@app.route('/registration', methods=['GET', 'POST']
 
 """
 :0
