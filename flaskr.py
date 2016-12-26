@@ -89,7 +89,7 @@ def logout():
     return redirect(url_for('show_entries'))
 
 #Method to create an account for posting/access to other parts of the site
-@app.route('/createaccount', methods='CREATEACCOUNT')
+@app.route('/createaccount', methods=["CREATEACCOUNT"])
 def createaccount():
     error = None
     if request.form == 'CREATEACCOUNT':
@@ -102,16 +102,16 @@ def createaccount():
         else:
             print('Did not recieve a request for passcode')
     return render_template('login.html', error=error)
-
+"""
 class RegistrationForm(form):
     username = TextField(Username, [validators.Length(min=4, max=20)])
     email = TextField(Email, [validators.Length(min=6, max=30)])
     password = PasswordField('Password', [validators.Required(), validators.EqualTo('confirm', message="Passwords must match")])
     confirm = PasswordField('repeat password')
-    accept_tos = BooleanField('I accept the terms of service and the privacy notice.')
+    accept_tos = BooleanField('I accept the terms of service and the privacy notice.', validators.Required())
+"""
 
-
-@app.route('/registration', methods=['GET', 'POST']
+#@app.route('/registration', methods=['GET', 'POST']
 
 """
 :0
