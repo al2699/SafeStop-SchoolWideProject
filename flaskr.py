@@ -2,7 +2,8 @@
 import os
 import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
-from wtforms import form
+from wtforms import Form
+from passlib.hash import sha256_crypt
 
 #create our little application :)
 app = Flask(__name__)
@@ -110,8 +111,17 @@ class RegistrationForm(form):
     confirm = PasswordField('repeat password')
     accept_tos = BooleanField('I accept the terms of service and the privacy notice.', validators.Required())
 """
+@app.route('/register/', methods=["GET", "POST"])
+def register_page():
+    try:
+        form = RegistrationForm(request.form)
+        if request.method == "POST" and form.validate():
+            username = form.username.data 
+            email = form.username.data
+            password = sha256.encrypt((str(form.password.data)))
 
-#@app.route('/registration', methods=['GET', 'POST']
+    except Exception as e:
+        return str(e)
 
 """
 :0
