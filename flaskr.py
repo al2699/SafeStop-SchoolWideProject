@@ -132,6 +132,16 @@ def createaccount():
         else:
             print('Did not recieve a request for passcode')
     return render_template('login.html', error=error)
+
+@app.route('/test2', methods=['GET', 'POST'])
+def test2():
+
+    if request.method == "POST":
+        if request.form['submit'] == 'submit':
+            checked = 'yesBox' in request.form
+            print checked
+
+    return render_template('scouting.html')
 """
 class RegistrationForm(form):
     username = TextField(Username, [validators.Length(min=4, max=20)])
