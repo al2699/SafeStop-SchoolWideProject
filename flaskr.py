@@ -1,4 +1,10 @@
 #all the imports
+"""
+For projection: we want to create an entire layout where a series of prompts/questions 
+is preented to the user. Robot photo, can it climb, can it do gears?
+Next we want to create an algorithm which calculates a score depending on the robot's 
+ability to preform.
+"""
 import os
 import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
@@ -51,12 +57,20 @@ def close_db(error):
     if hasattr(g, 'sqlite_db'):
         g.sqlite_db.close()
         
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def show_entries():
     db = get_db()
     cur = db.execute('select title, text from entries order by id desc')
     entries = cur.fetchall()
     return render_template('show_entries.html', entries = entries)
+"""
+    if request.form['checkbox'] == 'robotClimb':
+        print 'Robot climb was found!'
+    else:
+        print 'Hi!'
+"""
+
+    
     
 @app.route('/add', methods=['POST'])
 def add_entry():
@@ -73,6 +87,10 @@ def add_entry():
 def login():
     error = None
     if request.method == 'POST':
+        if request.form.get('check'):
+            print 'lmao'
+        else:
+            print 'Nothing was found.'
         if request.form['username'] != app.config['USERNAME']:
             error = 'Invalid username'
         elif request.form['password'] != app.config['PASSWORD']:
@@ -88,6 +106,17 @@ def logout():
     session.pop('logged_in', None)
     flash('You were logged out')
     return redirect(url_for('show_entries'))
+
+def contact(methods=['GET', 'POST']):
+    if request.method == 'POST':
+        if request.form['checkbox'] == 'robotClimb':
+            print 'Found Something'
+        elif request.form['checkbox'] == 'Do Something Else':
+            print 'Found something else' # do something else
+        else:
+            print 'Found nothing'# unknown
+    elif request.method == 'GET':
+        return render_template('contact.html', form=form)
 
 #Method to create an account for posting/access to other parts of the site
 @app.route('/createaccount', methods=["CREATEACCOUNT"])
@@ -122,7 +151,9 @@ def register_page():
 
     except Exception as e:
         return str(e)
-
+print 'Hello!'
+#value = request.form.getlist('check')
+#print value
 """
 :0
 """

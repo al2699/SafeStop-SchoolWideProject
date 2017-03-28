@@ -1,10 +1,10 @@
-body            { font-family: sans-serif; background-image: url("https://secure.static.tumblr.com/75215f535f2730b5eeebb486a4c422b8/ywr3fht/7AGo2i9fz/tumblr_static_tumblr_static_40e2yoao3c008440ko8ss4g8k_640.gif") }
+body            { font-family: sans-serif; background-image: url("http://team1389.com/wp-content/uploads/2014/12/2017-teaser-hero-image.jpg") }
 a, h1, h2       { color: #377ba8; }
 h1, h2          { font-family: 'Georgia', serif; margin: 0; }
 h1              { border-bottom: 2px solid #eee; }
 h2              { font-size: 1.2em; }
 
-.page           { margin: 2em auto; width: 35em; border: 5px solid #ccc;
+.page           { margin: 2em auto; width: 50em; border: 5px solid #ccc;
                   padding: 0.8em; background: white; }
 .entries        { list-style: none; margin: 0; padding: 0; }
 .entries li     { margin: 0.8em 1.2em; }
@@ -16,4 +16,63 @@ h2              { font-size: 1.2em; }
 .flash          { background: #cee5F5; padding: 0.5em;
                   border: 1px solid #aacbe2; }
 .error          { background: #f0d6d6; padding: 0.5em; }
-.onlyImage		{ size:1px;}
+.onlyImage		{ position: relative; right: 60px;}
+
+/* Rounded sliders */
+/* Rounded sliders */
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px); 
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
