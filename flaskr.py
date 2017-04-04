@@ -71,7 +71,6 @@ def show_entries():
 """
 
     
-    
 @app.route('/add', methods=['POST'])
 def add_entry():
     if not session.get('logged_in'):
@@ -133,15 +132,31 @@ def createaccount():
             print('Did not recieve a request for passcode')
     return render_template('login.html', error=error)
 
+#Here is our method for our instantiating our crouting page
 @app.route('/test2', methods=['GET', 'POST'])
 def test2():
+    db = get_db()
+    cur = db.execute('select name, desc from entries order by id desc')
+    entries = cur.fetchall()
+    return render_template('scouting.html', entries = entries)
 
+@app.route('/radd', methods=['POST'])
+def add_robot():
+    db = get_db()
+    db.execute('insert into entries (name, desc) values (?, ?)',
+                   [request.form['name'], request.form['desc']])
+    db.commit()
+    flash('New entry was successfully posted')
+    return redirect(url_for('test2'))
+    
+    """
     if request.method == "POST":
         if request.form['submit'] == 'submit':
             checked = 'yesBox' in request.form
             print checked
 
     return render_template('scouting.html')
+    """
 """
 class RegistrationForm(form):
     username = TextField(Username, [validators.Length(min=4, max=20)])
