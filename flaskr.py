@@ -136,7 +136,7 @@ def createaccount():
 def test2():
     print 'Finished /radd action.'
     db = get_db()
-    cur = db.execute('select title, text from entries order by id desc')
+    cur = db.execute('select title, text, gears from entries order by id desc')
     entries = cur.fetchall()
     return render_template('scouting.html', entries = entries)
 
@@ -144,8 +144,8 @@ def test2():
 @app.route('/radd', methods=['POST'])
 def add_robot():
     db = get_db()
-    db.execute('insert into entries (title, text) values (?, ?)',
-                   [request.form['title'], request.form['text']])
+    db.execute('insert into entries (title, text, gears) values (?, ?, ?)',
+                   [request.form['title'], request.form['text'], request.form['gears']])
     db.commit()
     flash('New entry was successfully posted')
     return redirect(url_for('test2'))
