@@ -9,6 +9,7 @@ GoogleMaps(app)
 @app.route("/")
 def mapview():
     # creating a map in the view
+    crime1 = Crime("DRUNK IN PUBLIC", "05/02/2017 06:00 AM", "DRUGS, COMBO OR TOLUENE (M)")
     mymap = Map(
         identifier="view-side",
         lat=37.4419,
@@ -55,7 +56,7 @@ def mapview():
              'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
              'lat': 33.201628,
              'lng': -117.242768,
-             'infobox': "<b>DRUNK IN PUBLIC: ALCOHOL, DRUGS, COMBO OR TOLUENE (M) 05/02/2017 06:00 AM</b>"
+             'infobox': "<b>" + crime1.getName() +":" + crime1.getCrimeType() + crime1.getCrimeDate()+ "</b>"
           },
           {
              'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
