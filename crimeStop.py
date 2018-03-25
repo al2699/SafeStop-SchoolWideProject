@@ -2,9 +2,19 @@ from flask import Flask, render_template
 from flask_googlemaps import GoogleMaps
 from flask_googlemaps import Map
 from Crime import Crime
+import csv
+
 
 app = Flask(__name__, template_folder=".")
 GoogleMaps(app)
+
+crimes = []
+
+def makeCrimeObjectsFromFile():
+  with open('crimes.csv', 'rb'):
+    
+  for x in range(0, 3):
+    crimes[x] = Crime()
 
 #Main page to display map
 @app.route("/")
