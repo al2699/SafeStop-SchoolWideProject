@@ -1,0 +1,7 @@
+Very useful site: https://www.open-public-records.com/california/san_diego_county_public_records.htm
+
+Also remember, last time you were working on this, you were stuck on how to
+how to make a method to both: import data from crimes.csv in main path and
+then create a list of Crime objects to then output to our map.
+
+-(Alan) (3/25/18)

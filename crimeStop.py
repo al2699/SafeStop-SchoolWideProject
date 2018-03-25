@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask_googlemaps import GoogleMaps
 from flask_googlemaps import Map
+from Crime import Crime
 
 app = Flask(__name__, template_folder=".")
 GoogleMaps(app)
@@ -56,7 +57,7 @@ def mapview():
              'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
              'lat': 33.201628,
              'lng': -117.242768,
-             'infobox': "<b>" + crime1.getName() +":" + crime1.getCrimeType() + crime1.getCrimeDate()+ "</b>"
+             'infobox': "<b>" + crime1.getCrimeName() +":" + crime1.getCrimeType() + crime1.getCrimeDate()+ "</b>"
           },
           {
              'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
