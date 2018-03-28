@@ -3,11 +3,13 @@ class Crime:
 	crimeName = ""
 	crimeDate = ""
 	crimeType = ""
+	crimeLocation = ""
 
-	def __init__(self, crimeName, crimeDate, crimeType):
+	def __init__(self, crimeName, crimeDate, crimeType, crimeLocation):
 		self.crimeName = crimeName
 		self.crimeDate = crimeDate
 		self.crimeType = crimeType
+		self.crimeLocation = crimeLocation
 
 	#SETTERS
 	def setCrimeName(self, crimeName):
@@ -19,6 +21,9 @@ class Crime:
 	def setCrimeType(self, crimeType):
 		self.crimeType = crimeType
 
+	def setCrimeLocation(self, crimeLocation):
+		self.crimeLocation = crimeLocation
+
 	#GETTERS
 	def getCrimeName(self):
 		return self.crimeName
@@ -28,3 +33,6 @@ class Crime:
 
 	def getCrimeType(self):
 		return self.crimeType
+
+	def getCrimeLocation(self):
+		return self.crimeLocation

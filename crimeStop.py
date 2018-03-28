@@ -1,26 +1,35 @@
 from flask import Flask, render_template
 from flask_googlemaps import GoogleMaps
 from flask_googlemaps import Map
+import pandas as pd
 from Crime import Crime
 import csv
+
+fileName == 'crimes.csv'
 
 
 app = Flask(__name__, template_folder=".")
 GoogleMaps(app)
 
-crimes = []
+crimes = [getRowAmount(fileName)]
+
+def getRowAmount(fileName):
+  df = pd.read_csv(fileName)
+  return df.shape[0]
 
 def makeCrimeObjectsFromFile():
-  with open('crimes.csv', 'rb'):
-    
-  for x in range(0, 3):
-    crimes[x] = Crime()
-
+  df = pd.read_csv('crimes.csv')
+  crimes[0] = Crime(df.Name[0], df.Date[0], df.Type[0], df.Location[0])
+  """
+  for x in range(0,1):
+    crimes[x] = Crime(df.Name[x], df.Date[x], df.Type[x], df.Location[x])
+  """
 #Main page to display map
 @app.route("/")
 def mapview():
     # creating a map in the view
-    crime1 = Crime("DRUNK IN PUBLIC", "05/02/2017 06:00 AM", "DRUGS, COMBO OR TOLUENE (M)")
+    #crime1 = Crime("DRUNK IN PUBLIC", "05/02/2017 06:00 AM", "DRUGS, COMBO OR TOLUENE (M)")
+    makeCrimeObjectsFromFile()
     mymap = Map(
         identifier="view-side",
         lat=37.4419,
@@ -67,7 +76,7 @@ def mapview():
              'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
              'lat': 33.201628,
              'lng': -117.242768,
-             'infobox': "<b>" + crime1.getCrimeName() +":" + crime1.getCrimeType() + crime1.getCrimeDate()+ "</b>"
+             'infobox': "<b>" + crimes[0].getCrimeName() +":" + crimes[0].getCrimeType() + crimes[0].getCrimeDate()+ "</b>"
           },
           {
              'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
